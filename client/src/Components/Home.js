@@ -12,12 +12,11 @@ function Home() {
     return (
         <div>
             <div className="main-section">
-            <Navbar/>
-                <div className="upload-pdf">
-                    <UploadPdf setPDF={setPDF} />
-                </div>
-                <div className="view-pdf">
-                    <ViewPdf pdf={pdf} />
+                <Navbar />
+                <div className="pdf-section">
+                    {
+                        pdf ? <ViewPdf pdf={pdf}  /> : <UploadPdf  setPDF={setPDF}/>
+                    }
                 </div>
             </div>
         </div>

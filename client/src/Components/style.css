@@ -16,17 +16,41 @@ button{
 .main-section{
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
 }
 .react-pdf__Document{
     max-height: 840px;
     overflow: hidden;
     padding: 20px;
 }
-.upload-pdf{
-    width: 100%;
+.main-section .pdf-section{
     height: 100%;
+    width: 100%;
+}
+.pagination{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #E48586;
+}
+
+
+.upload-pdf{
+height: 400px;
+width: 700px;
+display: flex;
+border: 2px dotted #916DB3;
+margin-top: 20px;
+align-items: center;
+justify-content: center;
+}
+.upload-pdf label{
+    cursor: pointer;
 }

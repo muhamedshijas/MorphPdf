@@ -1,35 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { Document, Page,pdfjs } from 'react-pdf';
+import React, { useEffect, useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 
-function ViewPdf({pdf}) {
-    const [pageNumber, setPageNumber] = useState(1); // Initialize page number to 1
+import { MDBIcon } from 'mdb-react-ui-kit';
 
-    const handleNextPage = () => {
-      setPageNumber((prevPageNumber) => prevPageNumber + 1);
-    };
-  
-    const handlePreviousPage = () => {
-      setPageNumber((prevPageNumber) => prevPageNumber - 1);
-    };
-    useEffect(() => { pdfjs.GlobalWorkerOptions.workerSrc =`https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;});
+function ViewPdf({ pdf }) {
+  const [pageNumber, setPageNumber] = useState(1);
+  const [numPages, setNumPages] = useState(null);
+
+  const handleNextPage = () => {
+    if (pageNumber < numPages) {
+      setPageNumber(pageNumber + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  }, []);
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
+
   return (
-    <div>
     <div>
       {pdf && (
         <div>
-          <Document file={pdf}>
+          <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={pageNumber} />
           </Document>
           <p>
-            Page {pageNumber} of the PDF
+            Page {pageNumber} of {numPages} in the PDF
           </p>
-          <button onClick={handlePreviousPage}>Previous Page</button>
-          <button onClick={handleNextPage}>Next Page</button>
+          <div className="pagination">
+          
+          <MDBIcon fas icon="angle-left" onClick={handlePreviousPage} disabled={pageNumber === 1} />
+          <MDBIcon fas icon="angle-right" onClick={handleNextPage} disabled={pageNumber === numPages}/>
+         
+          </div>
         </div>
       )}
     </div>
-    </div>
-  )
+  );
 }
 
-export default ViewPdf
+export default ViewPdf;
