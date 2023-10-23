@@ -1,32 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { PDFReader } from 'react-pdf-js';
+import './App.css'
 import { MDBBtn, MDBContainer } from 'mdb-react-ui-kit';
+import Home from './Components/Home';
 
 function App() {
+  const [pdfFile, setPDFFile] = useState(null);
+  const [pageNumber, setPageNumber] = useState(2); // Initialize page number to 1
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setPDFFile(file);
+  };
+
+ 
+
   return (
     <MDBContainer fluid>
-      <div
-        className='d-flex justify-content-center align-items-center'
-        style={{ height: '100vh' }}
-      >
-        <div className='text-center'>
-          <img
-            className='mb-4'
-            src='https://mdbootstrap.com/img/logo/mdb-transparent-250px.png'
-            style={{ width: 250, height: 90 }}
-          />
-          <h5 className='mb-3'>
-            Thank you for using our product. We're glad you're with us.
-          </h5>
-          <p className='mb-3'>MDB Team</p>
-          <MDBBtn
-            tag='a'
-            href='https://mdbootstrap.com/docs/standard/getting-started/'
-            target='_blank'
-            role='button'
-          >
-            Start MDB tutorial
-          </MDBBtn>
-        </div>
+      <div className="main-section">
+      <Home/>
       </div>
     </MDBContainer>
   );
