@@ -54,3 +54,9 @@ justify-content: center;
 .upload-pdf label{
     cursor: pointer;
 }
+.generate-pdf{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
